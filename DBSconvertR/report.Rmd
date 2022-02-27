@@ -1,0 +1,45 @@
+---
+  header-includes:
+  - \usepackage{fancyhdr}
+- \fancyfoot[CO,CE]{OSC-Group - http://www.osc-lab.de - JMU Wuerzburg - Pharmazie}
+- \fancyfoot[LE,RO]{\thepage}
+- \usepackage{fontspec}
+- \setmainfont{OpenSans}
+- \usepackage{lscape}
+- \newcommand{\blandscape}{\begin{landscape}}
+- \newcommand{\elandscape}{\end{landscape}}
+
+title: "TDM Report - Vancomycin"
+output:
+  pdf_document:
+  latexengine: xelatex
+df_print: paged
+date: "`r format(Sys.time(), '%d.%B %Y')`"
+
+
+---
+  \setmainfont{OpenSans}
+\addtolength{\headheight}{1.0cm}
+\pagestyle{fancyplain}
+\rhead{\includegraphics[height=1.2cm]{./logo_rechts.png}}
+\lhead{\includegraphics[height=1.2cm]{./logo_links.png}}
+\renewcommand{\headrulewidth}{0pt}
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+\newpage
+
+\blandscape
+
+# **Bland Altman Plot** at baseline
+
+```{r bland_alt, echo=FALSE, warning=FALSE, fig.height = 7, fig.width = 16, fig.align = "center"}
+grid.arrange(app_data$dist_plots[[1]],app_data$dist_plots[[2]],app_data$dist_plots[[3]], nrow=1, ncol=3)
+```
+
+\elandscape
