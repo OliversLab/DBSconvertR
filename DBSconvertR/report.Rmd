@@ -1,15 +1,13 @@
 ---
-  header-includes:
-  - \usepackage{fancyhdr}
-- \fancyfoot[CO,CE]{OSC-Group - http://www.osc-lab.de - JMU Wuerzburg - Pharmazie}
-- \fancyfoot[LE,RO]{\thepage}
-- \usepackage{fontspec}
-- \setmainfont{OpenSans}
-- \usepackage{lscape}
-- \newcommand{\blandscape}{\begin{landscape}}
-- \newcommand{\elandscape}{\end{landscape}}
+header-includes:
+    - \usepackage{fancyhdr}
+    - \fancyfoot[CO,CE]{OSC-Group - http://www.osc-lab.de - JMU Wuerzburg - Pharmazie}
+    - \fancyfoot[LE,RO]{\thepage}
+    - \usepackage{lscape}
+    - \newcommand{\blandscape}{\begin{landscape}}
+    - \newcommand{\elandscape}{\end{landscape}}
 
-title: "TDM Report - Vancomycin"
+title: "DBSconvertR v0.0.1 Report"
 output:
   pdf_document:
   latexengine: xelatex
@@ -18,11 +16,8 @@ date: "`r format(Sys.time(), '%d.%B %Y')`"
 
 
 ---
-  \setmainfont{OpenSans}
 \addtolength{\headheight}{1.0cm}
 \pagestyle{fancyplain}
-\rhead{\includegraphics[height=1.2cm]{./logo_rechts.png}}
-\lhead{\includegraphics[height=1.2cm]{./logo_links.png}}
 \renewcommand{\headrulewidth}{0pt}
 
 
@@ -30,16 +25,58 @@ date: "`r format(Sys.time(), '%d.%B %Y')`"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Conversion method: **`r input$method`**
 
+`r app_data$current_settings`
 
 \newpage
 
-\blandscape
+# **Observations** 
 
-# **Bland Altman Plot** at baseline
-
-```{r bland_alt, echo=FALSE, warning=FALSE, fig.height = 7, fig.width = 16, fig.align = "center"}
-grid.arrange(app_data$dist_plots[[1]],app_data$dist_plots[[2]],app_data$dist_plots[[3]], nrow=1, ncol=3)
+```{r raw_data, echo=FALSE, warning=FALSE, fig.height = 5, fig.width = 10, fig.align = "center"}
+app_data$current_obs_plot
 ```
 
-\elandscape
+
+# **Bland Altman Plot** 
+
+```{r bland_alt, echo=FALSE, warning=FALSE, fig.height = 5, fig.width = 10, fig.align = "center"}
+app_data$current_bland_altman_plot
+```
+
+\newpage
+
+
+# **Passing Bablok Regression** 
+
+```{r paBa_reg, echo=FALSE, warning=FALSE, fig.height = 5, fig.width = 10, fig.align = "center"}
+app_data$current_passing_bablok_plot
+```
+
+```{r paBa_reg_2, echo=FALSE, warning=FALSE, fig.height = 5, fig.width = 10, fig.align = "center"}
+app_data$current_passing_bablok_plot_2
+```
+
+\newpage
+
+# **Deming Regression** 
+
+```{r dem_reg, echo=FALSE, warning=FALSE, fig.height = 5, fig.width = 10, fig.align = "center"}
+app_data$current_deming_plot
+```
+
+```{r dem_reg_2, echo=FALSE, warning=FALSE, fig.height = 5, fig.width = 10, fig.align = "center"}
+app_data$current_deming_plot_2
+```
+
+\newpage
+
+# **Dataset**
+
+``` {r tdm_cov, echo=FALSE, warning=FALSE}
+
+kable(app_data$current_dataset, format = "latex")  %>%
+    kable_styling(position = "left")
+
+```
+

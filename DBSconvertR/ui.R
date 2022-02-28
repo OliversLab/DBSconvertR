@@ -11,6 +11,7 @@ library(shiny)
 
 shinyUI(
     navbarPage("DBSconvertR App - by Oliver Scherf-Clavel (c) 2022 - JMU Wuerzburg", id="mainpage",theme = shinytheme("united"),
+
                tabPanel("Import data",
                         sidebarLayout (
                           sidebarPanel(
@@ -52,10 +53,16 @@ shinyUI(
                                   ),
                                   conditionalPanel(condition="input.method=='Method 2'",
                                                    numericInput("K_bp",
-                                                                "Blood/Plasma Partition coefficient",
+                                                                "Blood cells/Plasma partition coefficient",
                                                                 value = 1,
                                                                 min=0,
                                                                 step = .1)
+                                  ),
+                                  conditionalPanel(condition="input.method=='Method 2'|input.method=='Method 1'",
+                                                   checkboxInput("use_mean_hct",
+                                                                 "Use mean Hct",
+                                                                 value=FALSE
+                                                   )
                                   ),
                                   sliderInput("limits_bland_altman",
                                               "Acceptance limits for Bland Altman Analysis",
@@ -68,6 +75,9 @@ shinyUI(
 
                                 # Show a plot of the generated distribution
                                 mainPanel(
+
+                                  use_busy_spinner(spin = "fading-circle"),
+
                                   tabsetPanel(
                                     tabPanel("Observations",
                                              plotOutput("observedPlot")
@@ -93,7 +103,7 @@ shinyUI(
                           sidebarPanel(
                             downloadButton("download_report", "Download Report")
                           ),
-                          mainPanel(
+                          mainPanel(use_busy_spinner(spin = "fading-circle")
 
                           )
                         )

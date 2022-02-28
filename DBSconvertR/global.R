@@ -6,6 +6,9 @@ library(mcr)
 library(shinythemes)
 library(DT)
 library(gridExtra)
+library(shinybusy)
+library(rmarkdown)
+library(kableExtra)
 
 # ---- color scheme and plot theme ---
 

@@ -38,8 +38,8 @@ createRegPlot <- function(x = NULL, x_name=NULL, y_name=NULL, n_x_sim = 100, alp
   slope <- paste0(round(mc_res_data@para[2,1],3), " (CI: ",round(mc_res_data@para[2,3],3), " to ", round(mc_res_data@para[2,4],3), ")")
 
   cor_text_1 <- paste0("Pearson's r = ", round(cor(mc_res_data@data$x, mc_res_data@data$y, method="pearson"),4))
-  cor_text_2 <- paste("Kendall's ", "tau", " = ", (round(cor(mc_res_data@data$x, mc_res_data@data$y, method="kendall"),4)), sep = "")
-  cor_text_3 <- paste("Spearman's ", "rho"," = ", (round(cor(mc_res_data@data$x, mc_res_data@data$y, method="spearman"),4)), sep = "")
+  cor_text_2 <- paste0("Kendall's ", "tau", " = ", (round(cor(mc_res_data@data$x, mc_res_data@data$y, method="kendall"),4)), sep = "")
+  cor_text_3 <- paste0("Spearman's ", "rho"," = ", (round(cor(mc_res_data@data$x, mc_res_data@data$y, method="spearman"),4)), sep = "")
 
   ci_lab <- paste0( round((1-alpha)*100,0), "% CI" )
 
